@@ -243,6 +243,29 @@
     .controls button:active {
       transform:translateY(0);
     }
+    .back-home-btn {
+      text-decoration: none;
+      font-size: 0.95rem;
+
+      /* grey look */
+      color: #6f6559;
+      background: #eee;
+
+      padding: 10px 16px;
+      border-radius: 999px;
+
+      margin-left: 10px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #ddd;
+    }
+
+    .back-home-btn:hover {
+      background: #e4e4e4;
+    }
 
   </style>
 </head>
@@ -257,6 +280,7 @@
             <div class="controls">
               <button id="pauseBtn" type="button">Pause</button>
               <button id="resetBtn" type="button">Reset</button>
+              <a href="../" class="back-home-btn">Back Home</a>
             </div>
           </div>
           <div class="range">Jan – Dec</div>
