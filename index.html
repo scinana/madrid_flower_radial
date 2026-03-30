@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madrid Flower Bloom Radial</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #faf8f4;
+      color: #2f2a24;
+    }
+
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .intro {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #7a6f62;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+
+    p {
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    a.button {
+      display: inline-block;
+      text-decoration: none;
+      background: #2f2a24;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    a.button:hover {
+      opacity: 0.9;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      color: #6f6559;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Madrid Flower Bloom Radial</h1>
+    <p class="intro">
+      A small visual project exploring seasonal flower bloom patterns in Madrid.
+      This repository contains multiple experiment versions so I can compare design,
+      structure, and interaction choices over time.
+    </p>
+
+    <div class="grid">
+      <section class="card">
+        <div class="tag">exp_0</div>
+        <h2>Original all-in-one prototype</h2>
+        <p>
+          The original version, where layout, styling, data, and JavaScript logic
+          are all contained inside a single HTML file.
+        </p>
+        <a class="button" href="./exp_0/">Open exp_0</a>
+      </section>
+
+      <section class="card">
+        <div class="tag">exp_1</div>
+        <h2>Data-separated version</h2>
+        <p>
+          A more flexible structure where the flower data lives in a separate JSON
+          file and the graph logic is moved into JavaScript.
+        </p>
+        <a class="button" href="./exp_1/">Open exp_1</a>
+      </section>
+    </div>
+
+    <p class="footer-note">
+      More experiments can be added later as exp_2, exp_3, and so on.
+    </p>
+  </div>
+</body>
+</html>
