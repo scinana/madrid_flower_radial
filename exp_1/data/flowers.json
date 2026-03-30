@@ -1,0 +1,59 @@
+{
+  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "flowers": [
+    {
+      "id": "cherry",
+      "name": "Cherry Blossom",
+      "emoji": "🌸",
+      "color": "#ef9db0",
+      "location": "Parque del Retiro",
+      "note": "Short, dramatic spring peak.",
+      "profile": [0.02, 0.16, 0.84, 1.0, 0.34, 0.06, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    {
+      "id": "almond",
+      "name": "Almond Blossom",
+      "emoji": "🌿",
+      "color": "#d6a0cf",
+      "location": "Quinta de los Molinos",
+      "note": "Very early bloom, before spring fully arrives.",
+      "profile": [0.2, 0.76, 1.0, 0.42, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.06]
+    },
+    {
+      "id": "rose",
+      "name": "Rose",
+      "emoji": "🌹",
+      "color": "#d95e74",
+      "location": "La Rosaleda del Retiro",
+      "note": "Longer season with a broad late-spring to summer plateau.",
+      "profile": [0.0, 0.0, 0.08, 0.28, 0.72, 1.0, 0.9, 0.78, 0.52, 0.2, 0.06, 0.0]
+    },
+    {
+      "id": "lavender",
+      "name": "Lavender",
+      "emoji": "🪻",
+      "color": "#8f79d6",
+      "location": "Jardín Botánico / nearby summer fields",
+      "note": "Summer-centered and fairly concentrated.",
+      "profile": [0.0, 0.0, 0.0, 0.06, 0.22, 0.6, 1.0, 0.94, 0.46, 0.08, 0.0, 0.0]
+    },
+    {
+      "id": "sunflower",
+      "name": "Sunflower",
+      "emoji": "🌻",
+      "color": "#f0b84a",
+      "location": "Countryside day trips near Madrid",
+      "note": "High summer burst with a short peak.",
+      "profile": [0.0, 0.0, 0.0, 0.0, 0.08, 0.22, 0.72, 1.0, 0.54, 0.1, 0.0, 0.0]
+    },
+    {
+      "id": "camellia",
+      "name": "Camellia",
+      "emoji": "🌺",
+      "color": "#ef7f95",
+      "location": "Botanical gardens and shaded parks",
+      "note": "Cool-season bloom, strongest in late winter.",
+      "profile": [0.66, 0.92, 1.0, 0.48, 0.12, 0.0, 0.0, 0.0, 0.0, 0.04, 0.2, 0.46]
+    }
+  ]
+}
