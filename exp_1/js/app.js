@@ -381,9 +381,10 @@ function renderChart() {
     circle.setAttribute('cy', cy);
     circle.setAttribute('r', innerR + level * (maxR - innerR));
     circle.setAttribute('fill', 'none');
-    circle.setAttribute('stroke', '#eadfd6');
+    circle.setAttribute('stroke', '#c9bbb0');
     circle.setAttribute('stroke-width', '1');
-    circle.setAttribute('stroke-dasharray', '2 7');
+    circle.setAttribute('stroke-dasharray', '1 8');
+    circle.setAttribute('stroke-linecap', 'round');
     svg.appendChild(circle);
   });
 
