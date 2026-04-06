@@ -7,6 +7,7 @@ const legend = document.getElementById('legend');
 const infoCard = document.getElementById('infoCard');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetBtn = document.getElementById('resetBtn');
+const staticBtn = document.getElementById('staticBtn');
 const statusNote = document.getElementById('statusNote');
 
 const state = {
@@ -15,6 +16,7 @@ const state = {
   cycleMs: 14000,
   bandWidthMonths: 1.22,
   isPaused: false,
+  isStatic: false,
   pauseStartedAt: null,
   elapsedBeforePause: 0,
   pauseElapsed: 0,
@@ -129,8 +131,36 @@ function wireUi() {
     state.pauseStartedAt = null;
     state.pauseElapsed = 0;
     state.isPaused = false;
+    state.isStatic = false;
     pauseBtn.textContent = 'Pause';
+    staticBtn.textContent = 'Static Graph';
     clearHover({ preserveSelected: false });
+    renderChart();
+  });
+
+  staticBtn.addEventListener('click', () => {
+    const now = performance.now();
+    state.isStatic = !state.isStatic;
+
+    if (state.isStatic) {
+      staticBtn.textContent = 'Animated Graph';
+      if (!state.isPaused) {
+        state.pauseElapsed = Math.max(0, now - startTime - state.elapsedBeforePause);
+        state.isPaused = true;
+        state.pauseStartedAt = now;
+        pauseBtn.textContent = 'Resume';
+      }
+    } else {
+      staticBtn.textContent = 'Static Graph';
+      if (state.pauseStartedAt != null) {
+        state.elapsedBeforePause += now - state.pauseStartedAt;
+      }
+      state.isPaused = false;
+      state.pauseStartedAt = null;
+      state.pauseElapsed = 0;
+      pauseBtn.textContent = 'Pause';
+    }
+
     renderChart();
   });
 
@@ -369,7 +399,7 @@ function renderChart() {
   clip.setAttribute('id', 'revealClip');
   const clipShape = document.createElementNS(ns, 'path');
   clipShape.setAttribute('id', 'revealSector');
-  const revealLeadMonth = state.sweepMonth + cursorWedgeWidthMonths / 2;
+  const revealLeadMonth = state.isStatic ? 12 : state.sweepMonth + cursorWedgeWidthMonths / 2;
   clipShape.setAttribute('d', revealSectorPath(revealLeadMonth));
   clip.appendChild(clipShape);
   defs.appendChild(clip);
@@ -457,7 +487,9 @@ function renderChart() {
   svg.appendChild(scaleLabel);
 
   const revealGroup = document.createElementNS(ns, 'g');
-  revealGroup.setAttribute('clip-path', 'url(#revealClip)');
+  if (!state.isStatic) {
+    revealGroup.setAttribute('clip-path', 'url(#revealClip)');
+  }
   svg.appendChild(revealGroup);
 
   flowers.forEach((flower, flowerIndex) => {
@@ -556,31 +588,33 @@ function renderChart() {
     });
   });
 
-  const cursorWedge = document.createElementNS(ns, 'path');
-  cursorWedge.setAttribute('d', fixedWedgePath(state.sweepMonth, cursorWedgeWidthMonths, cursorWedgeRadius));
-  cursorWedge.setAttribute('fill', '#bdb8b1');
-  cursorWedge.setAttribute('fill-opacity', '0.12');
-  cursorWedge.setAttribute('stroke', 'none');
-  svg.appendChild(cursorWedge);
+  if (!state.isStatic) {
+    const cursorWedge = document.createElementNS(ns, 'path');
+    cursorWedge.setAttribute('d', fixedWedgePath(state.sweepMonth, cursorWedgeWidthMonths, cursorWedgeRadius));
+    cursorWedge.setAttribute('fill', '#bdb8b1');
+    cursorWedge.setAttribute('fill-opacity', '0.12');
+    cursorWedge.setAttribute('stroke', 'none');
+    svg.appendChild(cursorWedge);
 
-  const headLeadMonth = state.sweepMonth + cursorWedgeWidthMonths / 2;
-  const headBar = document.createElementNS(ns, 'path');
-  headBar.setAttribute('d', monthArcPath(headLeadMonth - 0.14, headLeadMonth - 0.02, sweepBandOuter + 0.5, sweepBandOuter + 6.5));
-  headBar.setAttribute('fill', '#9b948d');
-  headBar.setAttribute('fill-opacity', '0.98');
-  headBar.setAttribute('stroke', '#fffdf9');
-  headBar.setAttribute('stroke-width', '1.4');
-  svg.appendChild(headBar);
+    const headLeadMonth = state.sweepMonth + cursorWedgeWidthMonths / 2;
+    const headBar = document.createElementNS(ns, 'path');
+    headBar.setAttribute('d', monthArcPath(headLeadMonth - 0.14, headLeadMonth - 0.02, sweepBandOuter + 0.5, sweepBandOuter + 6.5));
+    headBar.setAttribute('fill', '#9b948d');
+    headBar.setAttribute('fill-opacity', '0.98');
+    headBar.setAttribute('stroke', '#fffdf9');
+    headBar.setAttribute('stroke-width', '1.4');
+    svg.appendChild(headBar);
 
-  const headOuter = circlePoint(sweepBandOuter + 3, headLeadMonth);
-  const head = document.createElementNS(ns, 'circle');
-  head.setAttribute('cx', headOuter.x);
-  head.setAttribute('cy', headOuter.y);
-  head.setAttribute('r', '5.5');
-  head.setAttribute('fill', '#8f8983');
-  head.setAttribute('stroke', '#fffdf9');
-  head.setAttribute('stroke-width', '2');
-  svg.appendChild(head);
+    const headOuter = circlePoint(sweepBandOuter + 3, headLeadMonth);
+    const head = document.createElementNS(ns, 'circle');
+    head.setAttribute('cx', headOuter.x);
+    head.setAttribute('cy', headOuter.y);
+    head.setAttribute('r', '5.5');
+    head.setAttribute('fill', '#8f8983');
+    head.setAttribute('stroke', '#fffdf9');
+    head.setAttribute('stroke-width', '2');
+    svg.appendChild(head);
+  }
 
   const core = document.createElementNS(ns, 'circle');
   core.setAttribute('cx', cx);
@@ -612,11 +646,13 @@ function renderChart() {
 }
 
 function animate(timestamp) {
-  const effectiveElapsed = state.isPaused
-    ? state.pauseElapsed
-    : Math.max(0, timestamp - startTime - state.elapsedBeforePause);
-  const elapsed = effectiveElapsed % state.cycleMs;
-  state.sweepMonth = (elapsed / state.cycleMs) * 12;
+  if (!state.isStatic) {
+    const effectiveElapsed = state.isPaused
+      ? state.pauseElapsed
+      : Math.max(0, timestamp - startTime - state.elapsedBeforePause);
+    const elapsed = effectiveElapsed % state.cycleMs;
+    state.sweepMonth = (elapsed / state.cycleMs) * 12;
+  }
   renderChart();
   requestAnimationFrame(animate);
 }
