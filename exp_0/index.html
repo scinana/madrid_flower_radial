@@ -283,7 +283,7 @@
           </div>
           <div class="range">Jan – Dec</div>
         </div>
-        <svg id="chart" viewBox="0 0 980 930" aria-label="Interactive flower bloom radial chart"></svg>
+        <svg id="chart" viewBox="0 0 980 820" aria-label="Interactive flower bloom radial chart"></svg>
         <div class="footer-note">Illustrative sample bloom intensities for design mockup purposes. This version only shows the more pronounced bloom window for each flower.</div>
       </section>
 
@@ -311,7 +311,7 @@
 
     <section class="panel embed-block">
       <div class="kicker">⚙️ Data shape</div>
-      <div class="small">Each flower uses a 12-point monthly profile with values from 0 to 1. You can swap the sample data for your own months, locations, and notes without changing the rendering logic.</div>
+      <div class="small">Each flower uses a 12-point monthly profile with values from 0 to 1.</div>
     </section>
   </div>
 
@@ -409,7 +409,7 @@
     color: "#d95e74",
     location: "Rosaleda del Parque del Oeste, La Rosaleda del Retiro",
     note: "Early summer peak.",
-    profile: [0, 0, 0.1, 0.4, 0.8, 1.0, 0.7, 0.5, 0.2, 0.1, 0, 0]
+    profile: [0, 0, 0.1, 0.4, 0.8, 1.0, 0.45, 0.4, 0.2, 0.1, 0, 0]
   },
   {
     id: "tulip",
@@ -418,7 +418,7 @@
     color: "#ff7f50",
     location: "Real Jardín Botánico",
     note: "Short spring bloom.",
-    profile: [0, 0, 0.6, 1.0, 0.7, 0.2, 0, 0, 0, 0, 0, 0]
+    profile: [0, 0, 0.4, 1.0, 0.4, 0.2, 0, 0, 0, 0, 0, 0]
   }
 ];
 
@@ -447,7 +447,7 @@
     const width = 980;
     const height = 930;
     const cx = 470;
-    const cy = 460;
+    const cy = 350;
     const maxR = 250;
     const innerR = 64;
     const revealRadius = maxR + 220;
