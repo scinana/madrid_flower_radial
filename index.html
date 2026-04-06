@@ -23,11 +23,27 @@
       margin-bottom: 12px;
     }
 
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin: 0px 0 12px;
+      color: #3d362f;
+    }
+
     .intro {
       font-size: 1.05rem;
       line-height: 1.6;
       max-width: 760px;
       margin-bottom: 36px;
+    }
+
+    p {
+      line-height: 1.55;
+      margin-bottom: 18px;
     }
 
     .grid {
@@ -52,16 +68,6 @@
       margin-bottom: 10px;
     }
 
-    h2 {
-      margin: 0 0 10px;
-      font-size: 1.3rem;
-    }
-
-    p {
-      line-height: 1.55;
-      margin-bottom: 18px;
-    }
-
     a.button {
       display: inline-block;
       text-decoration: none;
@@ -74,6 +80,66 @@
 
     a.button:hover {
       opacity: 0.9;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      margin-top: 34px;
+    }
+
+    .small-note {
+      color: #6f6559;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      font-size: 0.95rem;
+      background: white;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid #ece3db;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    th {
+      background: #f6efe9;
+      color: #4d433a;
+      font-weight: 700;
+    }
+
+    tr:hover td {
+      background: #fcf9f6;
+    }
+
+    .references {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .references li {
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+
+    .references a {
+      color: #5a4f45;
+      word-break: break-word;
     }
 
     .footer-note {
@@ -114,9 +180,153 @@
       </section>
     </div>
 
+    <section class="section-card">
+      <h3>Flower dataset overview</h3>
+      <p class="small-note">
+        The bloom periods below are approximate and synthesized from multiple sources.
+        Some entries are based on public articles, while lilac was added from personal
+        observation in Madrid.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Flower</th>
+              <th>Approx flowering dates</th>
+              <th>Approx peak</th>
+              <th>Where to see them</th>
+              <th>Reference site</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Almond Blossom</td>
+              <td>Mid January – late February</td>
+              <td>Early February</td>
+              <td>Quinta de los Molinos, Casa de Campo, Parque del Retiro (Huerto Francés), Jardín Botánico</td>
+              <td>Silvosa Hermanos</td>
+            </tr>
+            <tr>
+              <td>Poppy (spring)</td>
+              <td>April – May</td>
+              <td>Late April</td>
+              <td>Morata de Tajuña, Vega del Jarama, Polán (Toledo)</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Poppy (autumn)</td>
+              <td>September – October</td>
+              <td>Mid September</td>
+              <td>Morata de Tajuña, Vega del Jarama, Polán (Toledo)</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Cactus</td>
+              <td>Summer</td>
+              <td>Late July</td>
+              <td>Desert City</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Cherry Blossom</td>
+              <td>March – April</td>
+              <td>Late March – early April</td>
+              <td>Parque Juan Carlos I</td>
+              <td>Silvosa Hermanos</td>
+            </tr>
+            <tr>
+              <td>Plum Blossom (ornamental)</td>
+              <td>March – April</td>
+              <td>Early April</td>
+              <td>Parque Juan Carlos I, streets of Madrid</td>
+              <td>Silvosa Hermanos</td>
+            </tr>
+            <tr>
+              <td>Lilac</td>
+              <td>April</td>
+              <td>April</td>
+              <td>Parque del Retiro, parks and gardens in Madrid</td>
+              <td>Personal observation</td>
+            </tr>
+            <tr>
+              <td>Sunflower</td>
+              <td>Mid August – early autumn</td>
+              <td>Late August</td>
+              <td>Brihuega, Altos Campos de Gómara (Soria), Campos de Belmonte (Cuenca), Castillo de Malpica del Tajo (Toledo)</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Lavender</td>
+              <td>June – July</td>
+              <td>June and July</td>
+              <td>Brihuega, Pezuela de las Torres</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Daisy</td>
+              <td>March – September</td>
+              <td>Late May</td>
+              <td>Parque del Retiro, El Capricho, Parque del Oeste, Madrid Río</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Rose</td>
+              <td>Spring (sometimes also autumn or year-round depending on variety)</td>
+              <td>Early June</td>
+              <td>Rosaleda del Parque del Oeste, Parque del Retiro</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+            <tr>
+              <td>Tulip</td>
+              <td>Late March – early June</td>
+              <td>Early April</td>
+              <td>Real Jardín Botánico</td>
+              <td>Madrid Secreto, Travel Vibes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h3>References</h3>
+      <ul class="references">
+        <li>
+          <strong>Madrid Secreto</strong> — <em>Where and when to see flowers in Madrid</em><br>
+          <a href="https://madridsecreto.co/donde-cuando-ver-flores-madrid/" target="_blank" rel="noopener noreferrer">
+            https://madridsecreto.co/donde-cuando-ver-flores-madrid/
+          </a><br>
+          Last visited on 6 Apr 2026
+        </li>
+        <li>
+          <strong>Travel Vibes</strong> — <em>Flowers in Madrid: where to see them</em><br>
+          <a href="https://travelvibes.es/flores-en-madrid-donde-verlas/" target="_blank" rel="noopener noreferrer">
+            https://travelvibes.es/flores-en-madrid-donde-verlas/
+          </a><br>
+          Last visited on 6 Apr 2026
+        </li>
+        <li>
+          <strong>Silvosa Hermanos</strong> — <em>When almond trees bloom and where to see them in Madrid</em><br>
+          <a href="https://silvosahermanos.es/cuando-florece-el-almendro-arboles-flor-madrid/" target="_blank" rel="noopener noreferrer">
+            https://silvosahermanos.es/cuando-florece-el-almendro-arboles-flor-madrid/
+          </a><br>
+          Last visited on 6 Apr 2026
+        </li>
+        <li>
+          <strong>Personal observation</strong> — Lilac bloom timing in Madrid, observed in April<br>
+          Last noted on 6 Apr 2026
+        </li>
+      </ul>
+    </section>
+
     <p class="footer-note">
-      More experiments can be added later as exp_2, exp_3, and so on.
-    </p>
+  For more information you can contact me at 
+  <a href="mailto:nana7milana@gmail.com">nana7milana@gmail.com</a>, 
+  or visit my website at 
+  <a href="https://anamilana.com" target="_blank">www.anamilana.com</a> 
+  to see more of my data related work.
+</p>
   </div>
 </body>
 </html>

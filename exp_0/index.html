@@ -25,14 +25,14 @@
     }
 
     .wrap {
-      max-width: 1320px;
+      max-width: 1500px;
       margin: 0 auto;
       padding: 28px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.6fr 0.9fr;
+      grid-template-columns: 1.9fr 0.8fr;
       gap: 24px;
       align-items: stretch;
     }
@@ -283,7 +283,7 @@
           </div>
           <div class="range">Jan – Dec</div>
         </div>
-        <svg id="chart" viewBox="0 0 900 760" aria-label="Interactive flower bloom radial chart"></svg>
+        <svg id="chart" viewBox="0 0 980 930" aria-label="Interactive flower bloom radial chart"></svg>
         <div class="footer-note">Illustrative sample bloom intensities for design mockup purposes. This version only shows the more pronounced bloom window for each flower.</div>
       </section>
 
@@ -321,61 +321,106 @@
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
     const flowers = [
-      {
-        id: "cherry",
-        name: "Cherry Blossom",
-        emoji: "🌸",
-        color: "#ef9db0",
-        location: "Parque del Retiro",
-        note: "Short, dramatic spring peak.",
-        profile: [0.02, 0.16, 0.84, 1.00, 0.34, 0.06, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
-      },
-      {
-        id: "almond",
-        name: "Almond Blossom",
-        emoji: "🌿",
-        color: "#d6a0cf",
-        location: "Quinta de los Molinos",
-        note: "Very early bloom, before spring fully arrives.",
-        profile: [0.20, 0.76, 1.00, 0.42, 0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.06]
-      },
-      {
-        id: "rose",
-        name: "Rose",
-        emoji: "🌹",
-        color: "#d95e74",
-        location: "La Rosaleda del Retiro",
-        note: "Longer season with a broad late-spring to summer plateau.",
-        profile: [0.00, 0.00, 0.08, 0.28, 0.72, 1.00, 0.90, 0.78, 0.52, 0.20, 0.06, 0.00]
-      },
-      {
-        id: "lavender",
-        name: "Lavender",
-        emoji: "🪻",
-        color: "#8f79d6",
-        location: "Jardín Botánico / nearby summer fields",
-        note: "Summer-centered and fairly concentrated.",
-        profile: [0.00, 0.00, 0.00, 0.06, 0.22, 0.60, 1.00, 0.94, 0.46, 0.08, 0.00, 0.00]
-      },
-      {
-        id: "sunflower",
-        name: "Sunflower",
-        emoji: "🌻",
-        color: "#f0b84a",
-        location: "Countryside day trips near Madrid",
-        note: "High summer burst with a short peak.",
-        profile: [0.00, 0.00, 0.00, 0.00, 0.08, 0.22, 0.72, 1.00, 0.54, 0.10, 0.00, 0.00]
-      },
-      {
-        id: "camellia",
-        name: "Camellia",
-        emoji: "🌺",
-        color: "#ef7f95",
-        location: "Botanical gardens and shaded parks",
-        note: "Cool-season bloom, strongest in late winter.",
-        profile: [0.66, 0.92, 1.00, 0.48, 0.12, 0.00, 0.00, 0.00, 0.00, 0.04, 0.20, 0.46]
-      }
-    ];
+  {
+    id: "almond",
+    name: "Almond Blossom",
+    emoji: "🌿",
+    color: "#c8a47a",
+    location: "Quinta de los Molinos, Casa de Campo, El Retiro (Huerto Francés), Jardín Botánico",
+    note: "Early spring bloom.",
+    profile: [0.3, 1.0, 0.4, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  },
+  {
+    id: "poppy_spring",
+    name: "Poppy (spring)",
+    emoji: "🌺",
+    color: "#e63946",
+    location: "Morata de Tajuña, Vega del Jarama, Polán (Toledo)",
+    note: "Spring bloom cycle.",
+    profile: [0, 0, 0.2, 1.0, 0.6, 0.1, 0, 0, 0, 0, 0, 0]
+  },
+  {
+    id: "poppy_autumn",
+    name: "Poppy (autumn)",
+    emoji: "🌺",
+    color: "#e63946",
+    location: "Morata de Tajuña, Vega del Jarama, Polán (Toledo)",
+    note: "Autumn bloom cycle.",
+    profile: [0, 0, 0, 0, 0, 0, 0, 0, 0.4, 1.0, 0.5, 0]
+  },
+  {
+    id: "cherry",
+    name: "Cherry Blossom",
+    emoji: "🌸",
+    color: "#f7a1c4",
+    location: "Parque Juan Carlos I",
+    note: "Classic spring bloom.",
+    profile: [0, 0.2, 0.8, 1.0, 0.4, 0, 0, 0, 0, 0, 0, 0]
+  },
+  {
+    id: "plum",
+    name: "Plum Blossom",
+    emoji: "🟣",
+    color: "#d98ac9",
+    location: "Parque Juan Carlos I, streets of Madrid",
+    note: "Early spring blossom.",
+    profile: [0, 0.1, 0.6, 1.0, 0.5, 0.1, 0, 0, 0, 0, 0, 0]
+  },
+  {
+    id: "lilac",
+    name: "Lilac",
+    emoji: "💜",
+    color: "#b57edc",
+    location: "El Retiro, parks and gardens in Madrid",
+    note: "April bloom.",
+    profile: [0, 0, 0.4, 1.0, 0.6, 0, 0, 0, 0, 0, 0, 0]
+  },
+  {
+    id: "sunflower",
+    name: "Sunflower",
+    emoji: "🌻",
+    color: "#f4c430",
+    location: "Brihuega, Soria, Cuenca, Toledo",
+    note: "Late summer bloom.",
+    profile: [0, 0, 0, 0, 0, 0, 0.2, 0.8, 1.0, 0.4, 0, 0]
+  },
+  {
+    id: "lavender",
+    name: "Lavender",
+    emoji: "🪻",
+    color: "#9b7edc",
+    location: "Brihuega, Pezuela de las Torres",
+    note: "Early summer bloom.",
+    profile: [0, 0, 0, 0, 0.2, 1.0, 0.9, 0.3, 0, 0, 0, 0]
+  },
+  {
+    id: "daisy",
+    name: "Daisy",
+    emoji: "🌼",
+    color: "#f7d046",
+    location: "El Retiro, El Capricho, Parque del Oeste, Madrid Río",
+    note: "Long flowering season.",
+    profile: [0, 0, 0.4, 0.6, 1.0, 0.9, 0.9, 0.8, 0.6, 0.3, 0.1, 0]
+  },
+  {
+    id: "rose",
+    name: "Rose",
+    emoji: "🌹",
+    color: "#d95e74",
+    location: "Rosaleda del Parque del Oeste, La Rosaleda del Retiro",
+    note: "Early summer peak.",
+    profile: [0, 0, 0.1, 0.4, 0.8, 1.0, 0.7, 0.5, 0.2, 0.1, 0, 0]
+  },
+  {
+    id: "tulip",
+    name: "Tulip",
+    emoji: "🌷",
+    color: "#ff7f50",
+    location: "Real Jardín Botánico",
+    note: "Short spring bloom.",
+    profile: [0, 0, 0.6, 1.0, 0.7, 0.2, 0, 0, 0, 0, 0, 0]
+  }
+];
 
     const svg = document.getElementById('chart');
     const tooltip = document.getElementById('tooltip');
@@ -399,13 +444,13 @@
       hoveredMonthIndex: null
     };
 
-    const width = 900;
-    const height = 760;
-    const cx = 390;
-    const cy = 392;
+    const width = 980;
+    const height = 930;
+    const cx = 470;
+    const cy = 460;
     const maxR = 250;
     const innerR = 64;
-    const revealRadius = maxR + 130;
+    const revealRadius = maxR + 220;
     const strongThreshold = 0.45;
     const diameterBandThreshold = 0.55;
     const sweepBandInner = maxR + 104;
