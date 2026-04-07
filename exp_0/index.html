@@ -25,14 +25,14 @@
     }
 
     .wrap {
-      max-width: 1500px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 28px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.9fr 0.8fr;
+      grid-template-columns: 1.6fr 0.9fr;
       gap: 24px;
       align-items: stretch;
     }
@@ -56,17 +56,23 @@
     }
 
     .title-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      column-gap: 20px;
+      row-gap: 6px;
       margin-bottom: 12px;
       padding: 8px 10px 0;
     }
 
+    .title-copy {
+      min-width: 0;
+      width: 100%;
+    }
+
     h1 {
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      line-height: 1.05;
+      font-size: clamp(1.45rem, 2.2vw, 2.2rem);
+      line-height: 1.06;
       margin: 0;
       letter-spacing: -0.03em;
       color: #c95d73;
@@ -74,16 +80,27 @@
 
     .subtitle {
       color: var(--muted);
-      font-size: 0.98rem;
-      max-width: 58ch;
-      line-height: 1.45;
+      font-size: 0.82rem;
+      line-height: 1.42;
       margin: 6px 0 0;
+      max-width: none;
+      width: 100%;
+      font-style: italic;
+    }
+
+    .subtitle-legend {
+      font-style: normal;
+      font-size: 0.8rem;
+      margin-top: 10px;
     }
 
     .range {
       color: #6f6965;
       font-size: 0.98rem;
       white-space: nowrap;
+      align-self: start;
+      justify-self: end;
+      padding-top: 6px;
     }
 
     .legend {
@@ -213,7 +230,7 @@
     @media (max-width: 720px) {
       .wrap { padding: 14px; }
       .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .title-row { flex-direction: column; align-items: flex-start; }
+      .title-row { grid-template-columns: 1fr; }
       .meta-row { grid-template-columns: 1fr; gap: 2px; }
     }
 
@@ -271,9 +288,16 @@
     <div class="hero">
       <section class="panel chart-panel">
         <div class="title-row">
-          <div>
+          <div class="title-copy">
             <h1>When Do Madrid’s Flowers Bloom?</h1>
-            <p class="subtitle">A radial bloom calendar for flowers blooming in different seasons (Data gathered by ChatGPT, not verified). Hover petals to inspect a flower, click legend cards to isolate it, and watch the year sweep forward from January as bloom periods appear around the circle.</p>
+              <p class="subtitle">
+                A radial bloom calendar of flowers blooming across the year in Madrid.<br>
+                Watch the year sweep forward from January, and hover over dots to inspect or isolate flowers.
+              </p>
+
+              <p class="subtitle subtitle-legend">
+                <strong>How to read:</strong> dots and curves show bloom intensity; outer bands mark bloom at 75% or higher.
+              </p>
             <div class="controls">
               <button id="pauseBtn" type="button">Pause</button>
               <button id="resetBtn" type="button">Reset</button>
@@ -283,8 +307,7 @@
           </div>
           <div class="range">Jan – Dec</div>
         </div>
-        <svg id="chart" viewBox="0 0 980 820" aria-label="Interactive flower bloom radial chart"></svg>
-        <div class="footer-note">Illustrative sample bloom intensities for design mockup purposes. This version only shows the more pronounced bloom window for each flower.</div>
+        <svg id="chart" viewBox="0 0 900 810" aria-label="Interactive flower bloom radial chart"></svg>
       </section>
 
       <aside class="panel side-panel">
@@ -310,8 +333,14 @@
     </div>
 
     <section class="panel embed-block">
-      <div class="kicker">⚙️ Data shape</div>
-      <div class="small">Each flower uses a 12-point monthly profile with values from 0 to 1.</div>
+      <div class="kicker">⚙️ References</div>
+      <div class="small">
+        Bloom period references:
+        <a href="https://madridsecreto.co/donde-cuando-ver-flores-madrid/" target="_blank">Madrid Secreto</a>,
+        <a href="https://travelvibes.es/flores-en-madrid-donde-verlas/" target="_blank">Travel Vibes</a>,
+        <a href="https://silvosahermanos.es/cuando-florece-el-almendro-arboles-flor-madrid/" target="_blank">Silvosa Hermanos</a>,
+        and personal observation (all last accessed 6 Apr 2026).
+      </div>
     </section>
   </div>
 
@@ -409,7 +438,7 @@
     color: "#d95e74",
     location: "Rosaleda del Parque del Oeste, La Rosaleda del Retiro",
     note: "Early summer peak.",
-    profile: [0, 0, 0.1, 0.4, 0.8, 1.0, 0.45, 0.4, 0.2, 0.1, 0, 0]
+    profile: [0, 0, 0.1, 0.4, 0.8, 1.0, 0.7, 0.5, 0.2, 0.1, 0, 0]
   },
   {
     id: "tulip",
@@ -418,7 +447,7 @@
     color: "#ff7f50",
     location: "Real Jardín Botánico",
     note: "Short spring bloom.",
-    profile: [0, 0, 0.4, 1.0, 0.4, 0.2, 0, 0, 0, 0, 0, 0]
+    profile: [0, 0, 0.5, 0.9, 0.8, 0.2, 0, 0, 0, 0, 0, 0]
   }
 ];
 
@@ -445,22 +474,26 @@
     };
 
     const width = 980;
-    const height = 930;
-    const cx = 470;
-    const cy = 350;
+    const height = 935;
+    const cx = 410;
+    const cy = 340;
     const maxR = 250;
     const innerR = 64;
-    const revealRadius = maxR + 220;
+    const revealRadius = maxR + 260;
     const strongThreshold = 0.45;
-    const diameterBandThreshold = 0.55;
+    const diameterBandThreshold = 0.75;
     const sweepBandInner = maxR + 104;
     const sweepBandOuter = maxR + 122;
     const cursorWedgeWidthMonths = 1.22;
     const cursorWedgeRadius = sweepBandInner - 6;
 
+    function flowerAngleOffset(flowerIndex) {
+      return (flowerIndex - (flowers.length - 1) / 2) * 0.065;
+    }
+
     function polar(monthIndex, value, flowerIndex) {
       const angleBase = (-Math.PI / 2) + (monthIndex / 12) * (Math.PI * 2);
-      const angleOffset = (flowerIndex - (flowers.length - 1) / 2) * 0.065;
+      const angleOffset = flowerAngleOffset(flowerIndex);
       const angle = angleBase + angleOffset;
       const r = innerR + value * (maxR - innerR);
       return {
@@ -480,12 +513,12 @@
       };
     }
 
-    function monthArcPath(startMonthFloat, endMonthFloat, radiusInner, radiusOuter) {
+    function monthArcPath(startMonthFloat, endMonthFloat, radiusInner, radiusOuter, angleOffset = 0) {
       let start = startMonthFloat;
       let end = endMonthFloat;
       if (end < start) end += 12;
-      const startAngle = (-Math.PI / 2) + (start / 12) * Math.PI * 2;
-      const endAngle = (-Math.PI / 2) + (end / 12) * Math.PI * 2;
+      const startAngle = (-Math.PI / 2) + (start / 12) * Math.PI * 2 + angleOffset;
+      const endAngle = (-Math.PI / 2) + (end / 12) * Math.PI * 2 + angleOffset;
       const p1 = { x: cx + Math.cos(startAngle) * radiusOuter, y: cy + Math.sin(startAngle) * radiusOuter };
       const p2 = { x: cx + Math.cos(endAngle) * radiusOuter, y: cy + Math.sin(endAngle) * radiusOuter };
       const p3 = { x: cx + Math.cos(endAngle) * radiusInner, y: cy + Math.sin(endAngle) * radiusInner };
@@ -520,35 +553,67 @@
       return `M ${cx} ${cy} L ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${radius} ${radius} 0 ${largeArc} 1 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)} Z`;
     }
 
-    function strongSeasonSegments(profile, threshold = strongThreshold) {
-      const active = profile
-        .map((v, i) => ({ v, i }))
-        .filter(d => d.v > threshold)
-        .map(d => d.i)
-        .sort((a, b) => a - b);
-      if (!active.length) return [];
+    function intensityAtMonthFraction(profile, t) {
+      const n = profile.length;
+      const wrapped = ((t % n) + n) % n;
+      const i0 = Math.floor(wrapped);
+      const i1 = (i0 + 1) % n;
+      const frac = wrapped - i0;
+      return profile[i0] * (1 - frac) + profile[i1] * frac;
+    }
 
+    function strongSeasonSegments(profile, threshold = diameterBandThreshold, samplesPerMonth = 80) {
+      const totalSamples = profile.length * samplesPerMonth;
       const segments = [];
-      let segStart = active[0];
-      let prev = active[0];
-      for (let i = 1; i < active.length; i++) {
-        const cur = active[i];
-        if (cur === prev + 1) {
-          prev = cur;
-          continue;
-        }
-        segments.push({ start: segStart, end: prev });
-        segStart = cur;
-        prev = cur;
-      }
-      segments.push({ start: segStart, end: prev });
+      let start = null;
+      let prevT = 0;
+      let prevV = intensityAtMonthFraction(profile, 0);
+      let prevOn = prevV >= threshold;
 
-      if (segments.length > 1 && segments[0].start === 0 && segments[segments.length - 1].end === 11) {
+      if (prevOn) start = 0;
+
+      for (let s = 1; s <= totalSamples; s++) {
+        const t = (profile.length * s) / totalSamples;
+        const v = intensityAtMonthFraction(profile, t);
+        const on = v >= threshold;
+
+        if (!prevOn && on) {
+          const denom = (v - prevV);
+          const ratio = denom === 0 ? 0 : (threshold - prevV) / denom;
+          start = prevT + (t - prevT) * ratio;
+        }
+
+        if (prevOn && !on && start !== null) {
+          const denom = (v - prevV);
+          const ratio = denom === 0 ? 0 : (threshold - prevV) / denom;
+          const end = prevT + (t - prevT) * ratio;
+          segments.push({ start, end });
+          start = null;
+        }
+
+        prevT = t;
+        prevV = v;
+        prevOn = on;
+      }
+
+      if (start !== null) {
+        segments.push({ start, end: profile.length });
+      }
+
+      if (
+        segments.length > 1 &&
+        segments[0].start <= 1e-6 &&
+        Math.abs(segments[segments.length - 1].end - profile.length) <= 1e-6
+      ) {
         const first = segments.shift();
         const last = segments.pop();
-        segments.unshift({ start: last.start, end: first.end + 12 });
+        segments.unshift({ start: last.start, end: first.end + profile.length });
       }
-      return segments;
+
+      return segments.map(seg => ({
+        start: Math.max(0, seg.start),
+        end: Math.min(profile.length * 2, seg.end)
+      }));
     }
 
     function pathForFlower(flower, index) {
@@ -847,9 +912,10 @@
         if (strongSegments.length) {
           const bandInner = maxR + 36 + flowerIndex * 16;
           const bandOuter = bandInner + 14;
+          const angleOffset = flowerAngleOffset(flowerIndex);
           strongSegments.forEach(seg => {
             const band = document.createElementNS(ns, 'path');
-            band.setAttribute('d', monthArcPath(seg.start - 0.08, seg.end + 1.08, bandInner, bandOuter));
+            band.setAttribute('d', monthArcPath(seg.start, seg.end, bandInner, bandOuter, angleOffset));
             band.setAttribute('fill', flower.color);
             band.setAttribute('fill-opacity', (!state.selectedFlower || state.selectedFlower === flower.id) ? '0.72' : '0.14');
             band.setAttribute('stroke', '#fffdf9');
